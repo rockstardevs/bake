@@ -209,6 +209,7 @@ func Rebuild(cmd *cobra.Command, args []string) {
 // Rebuilds at the current version and reuploads to drive
 func Reupload(cmd *cobra.Command, args []string) {
 	BuildCommon(false, true, args)
+	Upload()
 }
 
 func main() {
