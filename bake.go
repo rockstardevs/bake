@@ -149,14 +149,24 @@ func BuildCommon(save_version bool, upload bool, args []string) {
 		}
 	}
 	if IsGitRepo() && enable_git_tasks {
-		if enable_git_commit && !CommitVersion() {
-			return
-		}
-		if enable_git_tag && !TagVersion() {
-			return
-		}
-		if enable_git_push && !Push() {
-			return
+		// Skip all git changes if no new version
+		if !save_version {
+			logger.Message("git commit new version ...")
+			logger.Status(shlog.Orange, "skipped - no new version")
+			logger.Message("adding git tag ...")
+			logger.Status(shlog.Orange, "skipped - no new version")
+			logger.Message("git push to remote ...")
+			logger.Status(shlog.Orange, "skipped - no new version")
+		} else {
+			if enable_git_commit && !CommitVersion() {
+				return
+			}
+			if enable_git_tag && !TagVersion() {
+				return
+			}
+			if enable_git_push && !Push() {
+				return
+			}
 		}
 	}
 	if enable_uploads && upload {
