@@ -20,6 +20,11 @@ Once installed and configured, bake will
 
 Apart from build, all other steps can be enabled/disabled by flags.
 
+## Downloads
+
+ - [bake-0.1.0-darwin-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKaUpvRldSZ3NPcWc)
+ - [bake-0.1.0-linux-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKRFRzWFRnLXF3bXM)
+
 ## Installation
 
 Either download the latest pre compiled binary for you platform, from the links above.
