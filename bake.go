@@ -219,7 +219,6 @@ func Rebuild(cmd *cobra.Command, args []string) {
 // Rebuilds at the current version and reuploads to drive
 func Reupload(cmd *cobra.Command, args []string) {
 	BuildCommon(false, true, args)
-	Upload()
 }
 
 func main() {
@@ -282,7 +281,7 @@ func main() {
 	reuploadCmd := &cobra.Command{
 		Use:   "reupload",
 		Short: "rebuilds at the current version and reuploads to drive",
-		Run:   Rebuild,
+		Run:   Reupload,
 	}
 
 	rootCmd.AddCommand(majorCmd, minorCmd, nextCmd, rebuildCmd, reuploadCmd)
