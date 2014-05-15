@@ -217,11 +217,11 @@ func main() {
 		Short: "minimal build and release tool",
 	}
 	rootCmd.PersistentFlags().StringVarP(&versionFile, "version_file", "f", "VERSION", "name of the version file")
-	rootCmd.PersistentFlags().BoolVar(&enable_uploads, "enable_uploads", false, "enable uploads to Google Drive")
-	rootCmd.PersistentFlags().BoolVar(&enable_git_tasks, "enable_git_tasks", false, "enable git related tasks")
-	rootCmd.PersistentFlags().BoolVar(&enable_git_commit, "enable_git_commit", false, "enable git commits for version changes")
-	rootCmd.PersistentFlags().BoolVar(&enable_git_tag, "enable_git_tag", false, "enable git tagging for version changes.")
-	rootCmd.PersistentFlags().BoolVar(&enable_git_push, "enable_git_push", false, "enable git push to remotes")
+	rootCmd.PersistentFlags().BoolVar(&enable_uploads, "enable_uploads", true, "enable uploads to Google Drive")
+	rootCmd.PersistentFlags().BoolVar(&enable_git_tasks, "enable_git_tasks", true, "enable git related tasks")
+	rootCmd.PersistentFlags().BoolVar(&enable_git_commit, "enable_git_commit", true, "enable git commits for version changes")
+	rootCmd.PersistentFlags().BoolVar(&enable_git_tag, "enable_git_tag", true, "enable git tagging for version changes.")
+	rootCmd.PersistentFlags().BoolVar(&enable_git_push, "enable_git_push", true, "enable git push to remotes")
 
 	is_versioned, current_version, _ = GetVersion(&versionFile)
 
