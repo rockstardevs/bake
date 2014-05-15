@@ -5,8 +5,8 @@ import (
 	"bufio"
 	"code.google.com/p/google-api-go-client/drive/v2"
 	"fmt"
+	"github.com/prasmussen/gdrive/gdrive"
 	"github.com/singhsaysdotcom/cobra"
-	"github.com/singhsaysdotcom/gdrive/gdrive"
 	"github.com/singhsaysdotcom/shlog"
 	"os"
 	"os/exec"
@@ -226,13 +226,18 @@ func main() {
 	is_versioned, current_version, _ = GetVersion(&versionFile)
 
 	// Log files
-	logFile, err := os.Create("bake.log")
+	err := os.Mkdir(".log", 0755)
+	if err != nil && !os.IsExist(err) {
+		fmt.Printf("Error creating logs directory\n")
+		os.Exit(1)
+	}
+	logFile, err := os.Create(".log/bake.log")
 	defer logFile.Close()
 	if err != nil {
 		fmt.Printf("Error creating log file\n")
 		os.Exit(1)
 	}
-	errLogFile, err = os.Create("bake.err.log")
+	errLogFile, err = os.Create(".log/bake.err.log")
 	defer errLogFile.Close()
 	if err != nil {
 		fmt.Printf("Error creating log file\n")
