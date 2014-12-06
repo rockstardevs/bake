@@ -3,13 +3,13 @@
 build and release tool for golang applications
 
 
-bake is a simple, minimal build, release and versioning tool that combines the go tool, git and google drive api to make it easier to release and maintain golang applications
+bake is a simple, minimal build, release and versioning tool that combines the go tool, git and google drive api. It aims to make it easier to release and maintain golang applications
 
 ### What does it do?
 Once installed and configured, bake will
 
   - maintain the current version of your app in a version file (default ./VERSION)
-  - either will create a version file, if it doesn't exist, with the intial version 0.1.0
+  - will either create a version file, if it doesn't exist, with the intial version 0.1.0
   - or increment version to the next build/minor/major version
   - build your binary (wraps aroung go build) and pass in the new version
   - built binaries are placed by default at .dist/$binary-$version-$platform-$arch
@@ -27,7 +27,7 @@ Apart from build, all other steps can be enabled/disabled by flags.
 
 ## Installation
 
-Either download the latest pre compiled binary for you platform, from the links above.
+Either download the latest pre compiled binary for your platform, from the links above.
 
 **OR**
 
@@ -45,7 +45,7 @@ There is no *required* configuration to get started. The is *optional* configura
 
 ### Uploading to Google Drive
 bake uses the gdrive app from http://github.com/prasmussen/gdrive for Google Drive integration. You need to generate
-an oauth token for the google drive api as a one time step. Currently, you need to install the gdrive app to do
+an oauth token for the google drive api, as a one time step. Currently, you need to install the gdrive app to do
 that
 
 ```shell
