@@ -22,8 +22,8 @@ Apart from build, all other steps can be enabled/disabled by flags.
 
 ## Downloads
 
- - [bake-0.1.0-darwin-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKaUpvRldSZ3NPcWc)
- - [bake-0.1.0-linux-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKRFRzWFRnLXF3bXM)
+ - [bake-0.1.3-darwin-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKUURwdHR5R2V6eWs)
+ - [bake-0.1.3-linux-amd64](https://drive.google.com/uc?id=0B5HWb3Sw6sFKNkxjby0teFc1RkE)
 
 ## Installation
 
@@ -41,7 +41,7 @@ go get github.com/singhsaysdotcom/bake
 
 ## Configuration
 
-There is no *required* configuration to get started. The is *optional* configuration to use some features.
+There is no *required* configuration to get started. There is *optional* configuration to use some features.
 
 ### Uploading to Google Drive
 bake uses the gdrive app from http://github.com/prasmussen/gdrive for Google Drive integration. You need to generate
