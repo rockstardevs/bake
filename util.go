@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"path"
-	"runtime"
 )
 
 func DirName() string {
@@ -19,7 +18,7 @@ func PkgName(name string) string {
 	if binName == "" {
 		binName = DirName()
 	}
-	return fmt.Sprintf(".dist/%s-%s-%s-%s", binName, current_version, runtime.GOOS, runtime.GOARCH)
+	return fmt.Sprintf(".dist/%s-%s-%s-%s", binName, current_version, GOOS, GOARCH)
 }
 
 func IsGitRepo() bool {

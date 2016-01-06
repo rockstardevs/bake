@@ -3,18 +3,26 @@ package main
 
 import (
 	"bufio"
-	"code.google.com/p/google-api-go-client/drive/v2"
 	"fmt"
-	"github.com/prasmussen/gdrive/gdrive"
-	"github.com/singhsaysdotcom/cobra"
-	"github.com/singhsaysdotcom/shlog"
 	"os"
 	"os/exec"
 	"path"
+	"runtime"
+
+	"github.com/singhsaysdotcom/cobra"
+	"github.com/singhsaysdotcom/gdrive/gdrive"
+	"github.com/singhsaysdotcom/shlog"
+	"google.golang.org/api/drive/v2"
 )
 
 var (
 	// Flags
+	NAME    string // populated via ldflags
+	VERSION string // populated via ldflags
+
+	GOOS   = runtime.GOOS
+	GOARCH = runtime.GOARCH
+
 	versionFile       string
 	enable_uploads    bool
 	enable_git_push   bool
@@ -31,14 +39,28 @@ var (
 	goog       *gdrive.Drive
 )
 
+func SetEnv() {
+	if os.Getenv("GOOS") != "" {
+		GOOS = os.Getenv("GOOS")
+	}
+	if os.Getenv("GOARCH") != "" {
+		GOARCH = os.Getenv("GOARCH")
+	}
+}
+
 func Build(args []string) bool {
+	SetEnv()
+	logger.Message("GOOS")
+	logger.Status(shlog.Grey, GOOS)
+	logger.Message("GOARCH")
+	logger.Status(shlog.Grey, GOARCH)
 	logger.Message("building %s ...", PkgName(""))
 	_, err := exec.LookPath("go")
 	if err != nil {
 		logger.Err()
 		return false
 	}
-	c := exec.Command("go", "build", "-o", PkgName(""))
+	c := exec.Command("go", "build", "-v", "-ldflags", "-X \"main.VERSION="+current_version.String()+"\"", "-o", PkgName(""))
 	if len(args) > 0 {
 		c.Args = append(c.Args, args...)
 	}
@@ -175,6 +197,12 @@ func BuildCommon(save_version bool, upload bool, args []string) {
 	logger.Done()
 }
 
+// PrintVersion prints the current version of bake.
+func PrintVersion(cmd *cobra.Command, args []string) {
+	logger.Message("Bake Version")
+	logger.Status(shlog.Green, VERSION)
+}
+
 // Build a new major version
 func BuildMajor(cmd *cobra.Command, args []string) {
 	if !is_versioned {
@@ -254,6 +282,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	versionCmd := &cobra.Command{
+		Use:   "version",
+		Short: "prints current version of bake itself.",
+		Run:   PrintVersion,
+	}
+
 	majorCmd := &cobra.Command{
 		Use:   "major",
 		Short: "build a new major version",
@@ -284,6 +318,6 @@ func main() {
 		Run:   Reupload,
 	}
 
-	rootCmd.AddCommand(majorCmd, minorCmd, nextCmd, rebuildCmd, reuploadCmd)
+	rootCmd.AddCommand(versionCmd, majorCmd, minorCmd, nextCmd, rebuildCmd, reuploadCmd)
 	rootCmd.Execute()
 }
